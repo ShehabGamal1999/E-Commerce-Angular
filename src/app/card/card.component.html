@@ -1,0 +1,32 @@
+<div class="col" (click)="redirectToDetails(product.id)">
+  <div class="card shadow   bg-body-tertiary rounded-5 position-relative">
+      @if (product.availabilityStatus === "In Stock") {<span class="bg-success px-3 text-light  rounded-5 position-absolute mt-3 mx-3">in Stock</span>}
+      @else {
+          <span  class="bg-danger px-3 text-light  rounded-5 position-absolute mt-3 mx-3">Out of Stock</span>
+      }
+
+<img [src]="product.thumbnail" height="300" class="card-img-top " alt="...">
+    <div class="card-body">
+      <h5 class="card-title" >{{product.title}} <span> ${{product.price}}</span></h5>
+      <p class="card-text">{{product.description}}</p>
+      <p class="card-text">
+        Rating:
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <i
+            *ngIf="product.rating >= star"
+            class="fas fa-star"
+            style="color: #198754;"></i>
+          <i
+            *ngIf="product.rating < star && product.rating >= (star - 0.5)"
+            class="fas fa-star-half-alt"
+            style="color: #198754;"></i>
+          <i
+            *ngIf="product.rating < (star - 0.5)"
+            class="far fa-star"
+            style="color: lightgray;"></i>
+        </ng-container>
+      </p>
+      <button class="btn btn-outline-success rounded-5">Add to cart</button>
+    </div>
+  </div>
+</div>

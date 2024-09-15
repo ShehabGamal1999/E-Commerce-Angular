@@ -1,0 +1,115 @@
+<div class="container my-5">
+  <div class="row">
+    <!-- Product Image -->
+    <div class="col-md-6">
+      <img
+        [src]="productDetails.thumbnail"
+        alt="product image"
+        height="400"
+        class="figure-img"
+      />
+    </div>
+
+    <!-- Product Details -->
+    <div class="col-md-6">
+      <h1 class="fw-bold">{{ productDetails.title }}</h1>
+      <p class="text-muted">{{ productDetails.description }}</p>
+
+      <!-- Rating Display -->
+      <div class="mb-3">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <i
+            *ngIf="productDetails.rating >= star"
+            class="fas fa-star"
+            style="color: #198754"
+          ></i>
+          <i
+            *ngIf="
+              productDetails.rating < star &&
+              productDetails.rating >= star - 0.5
+            "
+            class="fas fa-star-half-alt"
+            style="color: #198754"
+          ></i>
+          <i
+            *ngIf="productDetails.rating < star - 0.5"
+            class="far fa-star"
+            style="color: lightgray"
+          ></i>
+        </ng-container>
+        <span class="text-success ms-2"
+          >({{ productDetails.reviews.length }} reviews)</span
+        >
+      </div>
+
+      <!-- Price Section -->
+      <h3 class="text-dark fw-bold">
+        {{
+          productDetails.price
+            | discountPrice : productDetails.discountPercentage
+        }}
+      </h3>
+      <p class="text-muted">
+        or ${{ (productDetails.price / 6).toFixed(2) }}/month with 6 months
+        special financing
+      </p>
+
+      <!-- Stock Status -->
+      <div
+        *ngIf="productDetails.stock > 0"
+        class="badge bg-success text-light py-2 px-3 mb-3 rounded-5"
+      >
+        In Stock (Only {{ productDetails.stock }} left!)
+      </div>
+      <div
+        *ngIf="productDetails.stock <= 0"
+        class="badge bg-danger text-dark py-2 px-3 mb-3 rounded-5"
+      >
+        Out of Stock
+      </div>
+      <!-- Quantity Input and Stock Status -->
+      <div class="mb-3 d-flex align-items-center">
+        <!-- Decrease Button -->
+        <button
+          class="btn btn-outline-secondary rounded-2"
+          (click)="decreaseQuantity()"
+        >
+          -
+        </button>
+
+        <!-- Quantity Display -->
+        <input
+          type="number"
+          [(ngModel)]="quantity"
+          min="0"
+          [max]="productDetails.stock === 0 ? 1 : productDetails.stock"
+          class="form-control mx-2 text-center w-25"
+          readonly
+        />
+
+        <!-- Increase Button -->
+        <button
+          class="btn btn-outline-secondary rounded-2"
+          (click)="increaseQuantity()"
+        >
+          +
+        </button>
+      </div>
+      <!-- Buttons -->
+      <div class="d-flex gap-2 mb-4">
+        <button
+          class="btn btn-success rounded-5 w-25 btn-lg"
+          [disabled]="quantity === 0 || productDetails.stock === 0"
+        >
+          Buy Now
+        </button>
+        <button
+          class="btn btn-outline-success rounded-5 w-25 btn-lg"
+          [disabled]="quantity === 0 || productDetails.stock === 0"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.active-link {
+  color: #fff;
+  background-color: #198754;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 10px ;
+}
+.active-link {
+  transition: background-color 0.3s, color 0.3s;
+}
