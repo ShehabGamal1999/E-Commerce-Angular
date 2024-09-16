@@ -1,1 +1,123 @@
-<p>register works!</p>
+<div class="d-flex justify-content-center">
+  <div>
+    <h3 class="text-center my-4">Register Form</h3>
+
+    <form
+      [formGroup]="registerationform"
+      (ngSubmit)="handleFormSubmit()"
+      class="border-2 p-3 border"
+      style="width: 600px"
+    >
+      <div class="mb-3">
+        <label for="name" class="form-label fw-bold">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="text"
+          formControlName="Name"
+        />
+        @if (registerationform.get("Name")?.invalid &&
+        registerationform.get("Name")?.touched) {
+        <div class="alert alert-danger">
+          @if (registerationform.get("Name")?.hasError("required")) {
+          <span>Name is required</span>
+          }@if (registerationform.get("Name")?.hasError("minlength")) {
+          <span>Name must be atleast 3 characters</span>
+
+          } @if (registerationform.get("Name")?.hasError("maxlength")) {
+          <span>Name must be less than 20 characters</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label fw-bold">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="Email"
+        />
+        @if (registerationform.get('Email')?.invalid &&
+        registerationform.get('Email')?.touched) {
+        <div class="alert alert-danger">
+          @if (registerationform.get('Email')?.hasError('required')) {
+          <span>Email is required</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label fw-bold">User Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="text"
+          formControlName="UserName"
+        />
+        @if (registerationform.get("UserName")?.invalid &&
+        registerationform.get("UserName")?.touched) {
+        <div class="alert alert-danger">
+          @if (registerationform.get("UserName")?.hasError("required")) {
+          <span>UserName is required</span>
+          }@if (registerationform.get("UserName")?.hasError("minlength")) {
+          <span>UserName must be atleast 3 characters</span>
+
+          } @if (registerationform.get("UserName")?.hasError("maxlength")) {
+          <span>UserName must be less than 20 characters</span>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label fw-bold">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="Password"
+        />
+        @if (registerationform.get('Password')?.invalid &&
+        registerationform.get('Password')?.touched) {
+        <div class="alert alert-danger">
+          @if (registerationform.get('Password')?.hasError('required')) {
+          <span>Password is required</span>
+          } @if (registerationform.get('Password')?.hasError('pattern')) {
+          <span
+            >Password must be at least 8 characters long, contain 1 uppercase
+            letter, 1 number, and 1 special character</span
+          >
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label fw-bold"
+          >Confirm Password</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          formControlName="ConfirmPassword"
+        />
+
+        @if ( registerationform.get('ConfirmPassword')?.touched) {
+        <div class="alert alert-danger">
+          @if (registerationform.get('ConfirmPassword')?.hasError('required')) {
+          <span>Confirm Password is required</span>
+          } @if (registerationform.hasError('passwordsMismatch')) {
+          <span>Passwords do not match</span>
+          }
+        </div>
+        }
+      </div>
+
+      <button type="submit" class="btn btn-success w-25">Register</button>
+    </form>
+    <p class="text-center my-5">
+      Already have account! <a routerLink="/login" class="">Login</a>
+    </p>
+  </div>
+</div>

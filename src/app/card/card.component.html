@@ -1,8 +1,11 @@
 <div class="col" (click)="redirectToDetails(product.id)">
   <div class="card shadow   bg-body-tertiary rounded-5 position-relative">
-      @if (product.availabilityStatus === "In Stock") {<span class="bg-success px-3 text-light  rounded-5 position-absolute mt-3 mx-3">in Stock</span>}
-      @else {
-          <span  class="bg-danger px-3 text-light  rounded-5 position-absolute mt-3 mx-3">Out of Stock</span>
+      @if (product.stock > 0 && product.availabilityStatus === "In Stock") {<span class="bg-success px-3 text-light  rounded-5 position-absolute mt-3 mx-3">in Stock</span>}
+      @else if (product.stock > 0 && product.availabilityStatus === "Low Stock") {
+        <span class="bg-warning px-3 text-light  rounded-5 position-absolute mt-3 mx-3">Low Stock</span>
+      }
+      @else if (product.stock == 0) {
+          <span  class="bg-danger px-3 text-light  rounded-5 position-absolute mt-3 mx-3"><output></output>Out of Stock</span>
       }
 
 <img [src]="product.thumbnail" height="300" class="card-img-top " alt="...">
